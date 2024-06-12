@@ -38,3 +38,18 @@ $ cargo run
 ```shell
 $ cargo test 
 ```
+
+## Method
+This approach was thought to use a simple solution with Elixir in order to set the baseline of time to process. As the second step, iterations over Rust implementation were tested to a better result. Finally will be tested to distribute the Rust processes under an Erlang Beam Node distribution and see if that can decrease the time to process.
+
+The theory of the implementation came from [wikipedia](https://en.wikipedia.org/wiki/Merkle_tree) page
+
+[imh](https://en.wikipedia.org/wiki/Merkle_tree#/media/File:Hash_Tree.svg)
+
+All the iterations and time to response where measured under an AMD Ryzen9 with 16 cores and 48GB RAM. 
+
+|  Implementation | Description | Time to process |
+|---|---|---|
+| [Elixir](./merkle_root_ex)| Simple Mix application with MerkleTree lib   |  ~1476ms
+| [Rust](./merkle_root) | Simple Cargo application using  |
+| Distributed Rust | | 
