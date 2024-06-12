@@ -1,4 +1,5 @@
 use sha256::digest;
+use std::{fs::read_to_string, path::Path};
 
 #[derive(Debug, Clone)]
 struct MerkleNode {
@@ -33,8 +34,8 @@ struct MerkleTree {
 }
 
 impl MerkleTree {
-    fn new(data_blocks: Vec<&str>) -> Self {
-        let mut nodes: Vec<MerkleNode> = data_blocks.into_iter().map(MerkleNode::new).collect();
+    fn new(transactions: Vec<&str>) -> Self {
+        let mut nodes: Vec<MerkleNode> = transactions.into_iter().map(MerkleNode::new).collect();
 
         while nodes.len() > 1 {
             if nodes.len() % 2 != 0 {
@@ -62,13 +63,8 @@ impl MerkleTree {
 }
 
 fn main() {
-    let data_blocks = vec![
-        "77d519a56a3bb197bca02ed25f880a122487914556d587588e633c8368d13053",
-        "915961583d426ff5d6726ee59ff7e1ad234d8343f60c57ab023b21741fdba723",
-        "7a172559f818c9d9f750b20f9fb16ed89879df47c20e03ffeaa3026c1d297646",
-        "2163a680ddcd3b7dcfb444d1e19395e59c63781c09e29c8d4b66bfd6460ca142",
-    ];
-    let merkle_tree = MerkleTree::new(data_blocks);
+    let transactions: String = read_to_string(Path::new("../../input.txt")).unwrap();
+    let merkle_tree = MerkleTree::new(transactions);
 
-    println!("Merkle Root Hash: {}", merkle_tree.root_hash());
+    println!("MerkleRoot Hash: {}", merkle_tree.root_hash());
 }
