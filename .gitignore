@@ -1,2 +1,4 @@
-target/
-.spin/
+**/target/
+**/.temp
+*/.DS_Store
+.env
