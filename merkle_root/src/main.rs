@@ -10,7 +10,7 @@ struct MerkleNode {
 
 impl MerkleNode {
     fn new(data: &str) -> Self {
-        let hash = digest(data.to_string());
+        let hash = data.to_string();
         MerkleNode {
             hash,
             left: None,
@@ -63,7 +63,13 @@ impl MerkleTree {
 }
 
 fn main() {
-    let transactions: String = read_to_string(Path::new("../../input.txt")).unwrap();
+    //let transactions: String = read_to_string(Path::new("../../input.txt")).unwrap();
+    let transactions = vec![
+        "77d519a56a3bb197bca02ed25f880a122487914556d587588e633c8368d13053",
+        "915961583d426ff5d6726ee59ff7e1ad234d8343f60c57ab023b21741fdba723",
+        "7a172559f818c9d9f750b20f9fb16ed89879df47c20e03ffeaa3026c1d297646",
+        "2163a680ddcd3b7dcfb444d1e19395e59c63781c09e29c8d4b66bfd6460ca142",
+    ];
     let merkle_tree = MerkleTree::new(transactions);
 
     println!("MerkleRoot Hash: {}", merkle_tree.root_hash());
