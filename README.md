@@ -42,7 +42,6 @@ This approach was thought to use a simple solution with Elixir in order to set t
 
 The theory of the implementation came from [wikipedia](https://en.wikipedia.org/wiki/Merkle_tree) page
 
-![MerkleTree](https://en.wikipedia.org/wiki/Merkle_tree#/media/File:Hash_Tree.svg)
 
 All the iterations and time to response where measured under an AMD Ryzen9 with 16 cores and 48GB RAM. 
 
