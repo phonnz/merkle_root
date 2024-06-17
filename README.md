@@ -18,7 +18,8 @@ The supplied transactions are in their hashed form and are ordered. The input fi
 ## Usage
 
 ```shell
-$ cargo run <input_file.txt>
+$ cd merkle_root
+$ cargo run 
 ```
 
 Default input file is input.txt
@@ -30,14 +31,11 @@ The MerkleTree Root and the elapsed time to compute it.
 
 ```shell
 $ cargo run 
-    2024-06-10T15:14:47.318925Z  INFO  Failed  = 13
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.04s
+     Running `target/debug/merkle_root`
+      MerkleRoot Hash: e7394afb40d7bf8debb3171f212b87e8a9ab2437bec55bf5d320cef4d6bfbe6b
 ```
 
-## Testing
-
-```shell
-$ cargo test 
-```
 
 ## Method
 This approach was thought to use a simple solution with Elixir in order to set the baseline of time to process. As the second step, iterations over Rust implementation were tested to a better result. Finally will be tested to distribute the Rust processes under an Erlang Beam Node distribution and see if that can decrease the time to process.
@@ -50,6 +48,6 @@ All the iterations and time to response where measured under an AMD Ryzen9 with 
 
 |  Implementation | Description | Time to process |
 |---|---|---|
-| [Elixir](./merkle_root_ex)| Simple Mix application with MerkleTree lib   |  ~1476ms
-| [Rust](./merkle_root) | Simple Cargo application using  |
-| Distributed Rust |- |- | 
+| [Elixir](./merkle_root_ex)| Simple Mix application with MerkleTree lib   |  ~1476 ms
+| [Rust](./merkle_root) | Simple Cargo application using  | 400 ms
+| Distributed Rust | wip |- | 
