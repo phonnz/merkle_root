@@ -1,5 +1,7 @@
 use sha256::digest;
-use std::{fs::read_to_string, path::Path};
+use std::error::Error;
+use std::fs::File;
+use std::io::{BufRead, BufReader};
 
 #[derive(Debug, Clone)]
 struct MerkleNode {
@@ -10,7 +12,7 @@ struct MerkleNode {
 
 impl MerkleNode {
     fn new(data: &str) -> Self {
-        let hash = digest(data.to_string());
+        let hash = data.to_string();
         MerkleNode {
             hash,
             left: None,
@@ -62,9 +64,17 @@ impl MerkleTree {
     }
 }
 
-fn main() {
-    let transactions: String = read_to_string(Path::new("../../input.txt")).unwrap();
+fn main() -> Result<(), Box<dyn Error>> {
+    let file = File::open("input.txt")?;
+    let reader = BufReader::new(file);
+    let mut lines: Vec<String> = Vec::new();
+    for line in reader.lines() {
+        lines.push(line?);
+    }
+    let transactions: Vec<&str> = lines.iter().map(|s| s as &str).collect();
+
     let merkle_tree = MerkleTree::new(transactions);
 
     println!("MerkleRoot Hash: {}", merkle_tree.root_hash());
+    Ok(())
 }
