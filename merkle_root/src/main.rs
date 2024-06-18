@@ -85,7 +85,6 @@ mod tests {
 
     #[test]
     fn test_merkle_node_creation() {
-        // Create leaf nodes
         let left_node = MerkleNode {
             hash: "left_hash".to_string(),
             left: None,
@@ -98,29 +97,24 @@ mod tests {
             right: None,
         };
 
-        // Create a parent node with the left and right nodes as children
         let parent_node = MerkleNode {
             hash: "parent_hash".to_string(),
             left: Some(Box::new(left_node.clone())),
             right: Some(Box::new(right_node.clone())),
         };
 
-        // Verify the parent node's hash
         assert_eq!(parent_node.hash, "parent_hash");
 
-        // Verify the left child's hash
         assert!(parent_node.left.is_some());
         if let Some(left_child) = &parent_node.left {
             assert_eq!(left_child.hash, "left_hash");
         }
 
-        // Verify the right child's hash
         assert!(parent_node.right.is_some());
         if let Some(right_child) = &parent_node.right {
             assert_eq!(right_child.hash, "right_hash");
         }
 
-        // Verify cloning works correctly
         let cloned_parent_node = parent_node.clone();
         assert_eq!(cloned_parent_node.hash, "parent_hash");
         if let Some(left_child) = &cloned_parent_node.left {
